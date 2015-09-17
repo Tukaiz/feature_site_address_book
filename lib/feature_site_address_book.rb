@@ -12,7 +12,13 @@ module FeatureSiteAddressBook
   class FeatureSiteAddressBookFeatureDefinition
     include FeatureSystem::Provides
     def permissions
-      []
+      [
+        {
+          can: false,
+          callback_name: 'cannot_access_global_site_address_book',
+          name: 'Cannot View The Site Global Address Book'
+        }
+      ]
     end
   end
 
@@ -21,6 +27,10 @@ module FeatureSiteAddressBook
 
       def can_access_global_site_address_book
         can :access_global_site_address_book, Address
+      end
+
+      def cannot_access_global_site_address_book
+        cannot :access_global_site_address_book, Address
       end
 
     end
